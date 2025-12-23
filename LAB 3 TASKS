@@ -1,0 +1,287 @@
+TASKS :
+
+1 Task :
+
+#include <iostream>
+using namespace std;
+
+class Person {
+private:
+    string name;
+    string streetNo;
+    string houseNo;
+    string city;
+    string code;
+
+public:
+    // Setter function
+    void setData(string n, string s, string h, string c, string co) {
+        name = n;
+        streetNo = s;
+        houseNo = h;
+        city = c;
+        code = co;
+    }
+
+    // Getter / Display function
+    void display() {
+        cout << "Name: " << name << endl;
+        cout << "Address: "
+             << streetNo << ", "
+             << houseNo << ", "
+             << city << ", "
+             << code << endl;
+    }
+};
+
+int main() {
+    Person p;
+
+    p.setData("Ali", "Street 5", "House 12", "Lahore", "54000");
+    p.display();
+
+    return 0;
+}
+
+2 Task :
+
+#include <iostream>
+using namespace std;
+
+class Date {
+public:
+    int day, month, year;
+
+    void setDate(int d, int m, int y) {
+        day = d;
+        month = m;
+        year = y;
+    }
+};
+
+class Employee {
+private:
+    Date dob, doj;
+
+public:
+    void setEmployee(Date birth, Date join) {
+        dob = birth;
+        doj = join;
+    }
+
+    void checkConditions() {
+        int currentYear = 2012;
+
+        if (currentYear - doj.year <= 5)
+            cout << "Employee joined within last 5 years\n";
+        else
+            cout << "Employee joined more than 5 years ago\n";
+
+        if (currentYear - dob.year < 40)
+            cout << "Employee age is less than 40 years\n";
+        else
+            cout << "Employee age is 40 years or more\n";
+    }
+};
+
+int main() {
+    Date dob, doj;
+    dob.setDate(10, 5, 1980);
+    doj.setDate(1, 1, 2009);
+
+    Employee e;
+    e.setEmployee(dob, doj);
+    e.checkConditions();
+
+    return 0;
+}
+
+3 Task :
+
+#include <iostream>
+using namespace std;
+
+class Publication {
+protected:
+    string title;
+    float price;
+
+public:
+    void getdata() {
+        cout << "Enter title: ";
+        cin >> title;
+        cout << "Enter price: ";
+        cin >> price;
+    }
+
+    void putdata() {
+        cout << "Title: " << title << endl;
+        cout << "Price: " << price << endl;
+    }
+};
+
+class Book : public Publication {
+private:
+    int pages;
+
+public:
+    void getdata() {
+        Publication::getdata();
+        cout << "Enter page count: ";
+        cin >> pages;
+    }
+
+    void putdata() {
+        Publication::putdata();
+        cout << "Pages: " << pages << endl;
+    }
+};
+
+class Tape : public Publication {
+private:
+    float playTime;
+
+public:
+    void getdata() {
+        Publication::getdata();
+        cout << "Enter playing time (minutes): ";
+        cin >> playTime;
+    }
+
+    void putdata() {
+        Publication::putdata();
+        cout << "Playing Time: " << playTime << " minutes" << endl;
+    }
+};
+
+int main() {
+    Book b;
+    Tape t;
+
+    cout << "--- Enter Book Details ---\n";
+    b.getdata();
+
+    cout << "\n--- Enter Tape Details ---\n";
+    t.getdata();
+
+    cout << "\n--- Book Details ---\n";
+    b.putdata();
+
+    cout << "\n--- Tape Details ---\n";
+    t.putdata();
+
+    return 0;
+}
+
+4 Task :
+
+#include <iostream>
+using namespace std;
+
+class Person {
+protected:
+    int id;
+    string name, address;
+
+public:
+    Person() {}
+
+    void input() {
+        cout << "Enter ID, Name, Address: ";
+        cin >> id >> name >> address;
+    }
+
+    void display() {
+        cout << "ID: " << id << endl;
+        cout << "Name: " << name << endl;
+        cout << "Address: " << address << endl;
+    }
+};
+
+class Student : public Person {
+private:
+    int rollNumber;
+    float marks;
+
+public:
+    void input() {
+        Person::input();
+        cout << "Enter Roll Number and Marks: ";
+        cin >> rollNumber >> marks;
+    }
+
+    void display() {
+        Person::display();
+        cout << "Roll Number: " << rollNumber << endl;
+        cout << "Marks: " << marks << endl;
+    }
+};
+
+int main() {
+    Student s;
+    s.input();
+    s.display();
+
+    return 0;
+}
+
+5 Task :
+
+#include <iostream>
+using namespace std;
+
+class Computer {
+protected:
+    int wordSize, memorySize, storageSize;
+    float speed;
+
+public:
+    Computer() {}
+
+    Computer(int w, int m, int s, float sp) {
+        wordSize = w;
+        memorySize = m;
+        storageSize = s;
+        speed = sp;
+    }
+
+    void display() {
+        cout << "Word Size: " << wordSize << " bits\n";
+        cout << "Memory Size: " << memorySize << " MB\n";
+        cout << "Storage Size: " << storageSize << " MB\n";
+        cout << "Speed: " << speed << " MHz\n";
+    }
+};
+
+class Laptop : public Computer {
+private:
+    float length, width, height, weight;
+
+public:
+    Laptop() {}
+
+    Laptop(int w, int m, int s, float sp,
+           float l, float wi, float h, float we)
+        : Computer(w, m, s, sp) {
+        length = l;
+        width = wi;
+        height = h;
+        weight = we;
+    }
+
+    void display() {
+        Computer::display();
+        cout << "Length: " << length << endl;
+        cout << "Width: " << width << endl;
+        cout << "Height: " << height << endl;
+        cout << "Weight: " << weight << " kg\n";
+    }
+};
+
+int main() {
+    Laptop lp(64, 8192, 512000, 2400, 35, 25, 2, 2.5);
+    lp.display();
+    return 0;
+}
+
+
